@@ -1,0 +1,233 @@
+<div class="container-fluid">
+    <div class="content">
+        <h4>Registrar Plan de Movilidad</h4>
+    </div>
+
+    <div class="content mb-4" style="margin-top: 40px;">
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-4">
+                <h6 class="pl" style="margin-left:250px">Plantilla</h6>
+                <hr style="width: 620px;" id="hrplantilla">
+                <table class="table table-bordered tb">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Nombre de Documento</th>
+                            <th scope="col">Descarga</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Formato del Plan</td>
+                            <td>
+                                <a href="https://firebasestorage.googleapis.com/v0/b/fir-files-512e9.appspot.com/o/FormatosMovilidad%2F4-%20PLAN%20MAE.pdf?alt=media&token=40ed6d66-4985-4c21-b19c-4c18a071b84a" target="_blank">
+                                    <span class="iconify icon" data-icon="mdi:cloud-download" data-inline="false" data-width="30" data-height="30" style="margin-left:30px;"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Registro -->
+            <div class="col mb-4">
+                <h6 class="pl" style="margin-left:290px">Registro</h6>
+                <hr style="width: 620px;" id="hrplantilla">
+                <div class="row row-cols-1 row-cols-md-2 let ">
+
+                    <div class="col mb-2">
+                        <div class="card-body">
+                            <label for="">Adjuntar Plan</label>
+                            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;">
+                            <mat-form-field style="width: 150px;">
+                                <ngx-mat-file-input #documentoPlan placeholder="Adjuntar Archivo" [accept]="'.pdf'" (change)="onFilePlan($event)">
+                                </ngx-mat-file-input>
+                                <mat-icon matSuffix *ngIf="documentoPlan.empty" style="cursor: pointer;">folder</mat-icon>
+
+                                <a mat-icon-button matSuffix *ngIf="!documentoPlan.empty" (click)="documentoPlan.clear($event)" style="cursor: pointer;">
+                                    <mat-icon>clear</mat-icon>
+                                </a>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="col mb-3">
+                        <div class="card-body">
+                            <label for="">Alumno Ganador</label>
+                            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;">
+                            <select class="form-control" (change)="selectIdAlumnoGanador($event)">
+                                <option>Seleccionar...</option>
+                                <option *ngFor="let listganador of listAlumnoGanador"
+                                    value="{{listganador.id_presentacion_documentos}}">
+                                    {{listganador.nombre_persona}} {{listganador.apellido_persona}} /
+                                    {{listganador.nombre_convocatoria}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row let" style="margin-top: 0px;">
+                    <button style="margin-left: auto;margin-right: auto;" type="button" class="btn btn-danger al" (click)="Guardar()">Registrar</button>
+                </div>
+                <div class="container" style="margin-top:50px;">
+                    <select class="form-control" [(ngModel)]="opcionSeleccionado" (change)="FiltrarTablas()">
+                        <option *ngFor="let dato of datos">
+                            {{dato}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div style="margin-top:20px;" *ngIf="espera">
+                <label for="" style="margin-left:230px;">Planes en Espera</label>
+                <hr style="width: 150px; margin-left: 230px; margin-top: 0px;">
+                <table class="table table-hover" style="margin-left:230px; width:950px;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Escuela</th>
+                            <th scope="col">Convocatoria</th>
+                            <th scope="col">Doc. Plan</th>
+                            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+                            <th colspan="2">Aprobar / Denegar</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let listplanespera of listPlanesEspera | paginate: { itemsPerPage: 2, currentPage: p }; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{listplanespera.nombre_persona}} {{listplanespera.apellido_persona}}</td>
+                            <td>{{listplanespera.nombre_escuela}}</td>
+                            <td>{{listplanespera.nombre_convocatoria}}</td>
+                            <td><a href="{{listplanespera.doc_plan}}" target="_blank" style="margin-left: 9px;"><i class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>
+                            <td><span class="iconify reloj" data-icon="ant-design:clock-circle-filled"
+                                    data-inline="false"></span></td>
+                            <td><a (click)="decano_espera_positivo(listplanespera)"><span class="iconify aprobar"
+                                        data-icon="bi:check-circle-fill" data-inline="false"></span></a></td>
+                            <td><a (click)="decano_espera_negativo(listplanespera)"><span class="iconify denegar"
+                                        data-icon="whh:circledelete" data-inline="false"></span></a></td>
+                            <td><a (click)="general_espera_eliminar(listplanespera)"><span class="iconify eliminar"
+                                        data-icon="fa-solid:trash-alt" data-inline="false"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-left:185px;">
+                    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+            <div style="margin-top:20px;" *ngIf="aprobados">
+                <label for="" style="margin-left:230px;">Planes Aprobados</label>
+                <hr style="width: 150px; margin-left: 230px; margin-top: 0px;">
+                <table class="table table-hover" style="margin-left:230px; width:800px;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Escuela</th>
+                            <th scope="col">Convocatoria</th>
+                            <th scope="col">Doc. Plan</th>
+                            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let listaprobados of listPlanesAprobado | paginate: { itemsPerPage: 2, currentPage: p1 }; let i = index ; let i=index ">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{listaprobados.nombre_persona}} {{listaprobados.apellido_persona}}</td>
+                            <td>{{listaprobados.nombre_escuela}}</td>
+                            <td>{{listaprobados.nombre_convocatoria}}</td>
+                            <td><a href="{{listaprobados.doc_plan}}" target="_blank" style="margin-left:9px;"><i class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>
+                            <td><span class="iconify aprobar2" data-icon="bi:check-circle-fill"
+                                    data-inline="false"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-left:185px;">
+                    <pagination-controls  (pageChange)="p1 = $event"></pagination-controls>
+                </div>
+
+            </div>
+
+            <div style="margin-top:20px;" *ngIf="denegados">
+                <label for="" style="margin-left:230px;">Planes Denegados</label>
+                <hr style="width: 150px; margin-left: 230px; margin-top: 0px;">
+                <table class="table table-hover" style="margin-left:230px; width:950px;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Escuela</th>
+                            <th scope="col">Convocatoria</th>
+                            <th scope="col">Doc. Plan</th>
+                            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+                            <th scope="col">Habilitar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let listadenegados of listPlanesDenegado | paginate: { itemsPerPage: 2, currentPage: p2 }; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{listadenegados.nombre_persona}} {{listadenegados.apellido_persona}}</td>
+                            <td>{{listadenegados.nombre_escuela}}</td>
+                            <td>{{listadenegados.nombre_convocatoria}}</td>
+                            <td><a href="{{listadenegados.doc_plan}}" target="_blank" style="margin-left:9px;"><i class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>                            <td><span class="iconify denegar2" data-icon="whh:circledelete" data-inline="false"></span>
+                            </td>
+                            <td><a (click)="habilitar_denegados(listadenegados)"><span class="iconify habilitar"
+                                        data-icon="mdi:clock-check" data-inline="false"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-left:185px;">
+                    <pagination-controls  (pageChange)="p2 = $event"></pagination-controls>
+                </div>
+            </div>
+
+            <div style="margin-top:20px;" *ngIf="eliminados">
+                <label for="" style="margin-left:230px;">Planes Eliminados</label>
+                <hr style="width: 150px; margin-left: 230px; margin-top: 0px;">
+                <table class="table table-hover" style="margin-left:230px; width:950px;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Escuela</th>
+                            <th scope="col">Convocatoria</th>
+                            <th scope="col">Doc. Plan</th>
+                            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+                            <th scope="1">Restaurar</th>
+                            <th scope="col">Eliminar Permanentemente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let listaeliminados of listPlanesEliminado | paginate: { itemsPerPage: 2, currentPage: p3 }; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{listaeliminados.nombre_persona}} {{listaeliminados.apellido_persona}}</td>
+                            <td>{{listaeliminados.nombre_escuela}}</td>
+                            <td>{{listaeliminados.nombre_convocatoria}}</td>
+                            <td><a href="{{listaeliminados.doc_plan}}" target="_blank" style="margin-left:9px;"><i class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>
+                            <td><span class="iconify denegar3" data-icon="whh:circledelete" data-inline="false"></span>
+                            </td>
+                            <td><a (click)="restaurar_eliminado(listaeliminados)"><span class="iconify restaurar"
+                                        data-icon="wpf:security-checked" data-inline="false"></span></a></td>
+                            <td><a (click)="eliminar_plan(listaeliminados)"><span class="iconify eliminar2"
+                                        data-icon="whh:databasedelete" data-inline="false"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-left:185px;">
+                    <pagination-controls  (pageChange)="p3 = $event"></pagination-controls>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>

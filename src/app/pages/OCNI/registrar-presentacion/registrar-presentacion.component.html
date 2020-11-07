@@ -1,0 +1,143 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col col-sm12 col-md-12 col-lg-12 col-xl-12">
+      <FONT FACE="courier" SIZE=7>REGISTRAR PRESENTACION AL ALUMNO</FONT>
+      <div class="row">
+        <div class="col-6">
+          <h3 style="font-family: monospace; color: rgb(0, 12, 80); margin-left:200px; margin-top:18px;">Seleccione al
+            Alumno</h3>
+          <div class="row">
+            <div class="col-6">
+              <hr style="width:350px; margin-left:155px;" id="hrplantilla">
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <h3 style="font-family: monospace; color: rgb(0, 12, 80); margin-left:198px; margin-top:18px;">Adjuntar
+            Documentos</h3>
+          <div class="row">
+            <div class="col-6">
+              <hr style="width:480px; margin-left:80px;" id="hrplantilla">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-2 mt-1">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Seleccione la Facultad</label>
+            <select class="form-control col-md-10" id="exampleFormControlSelect1" (change)="selectIdFacultad($event)">
+              <option value="0">Seleccionar...</option>
+              <option *ngFor="let facultades of listFacultades" value="{{facultades.id_facultad}}">
+                {{facultades.abreviatura}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group" *ngIf="listEscuelaFacultades?.length > 0">
+            <label for="exampleFormControlInput1">Seleccione la Escuela</label>
+            <select class="form-control col-md-10" id="exampleFormControlSelect1" (change)="selectIdEscuela($event)">
+              <option value="0">Seleccionar...</option>
+              <option *ngFor="let escuelafacultades of listEscuelaFacultades" value="{{escuelafacultades.id_escuela}}">
+                {{escuelafacultades.nombre_escuela}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group" *ngIf="listAlumnoPlan?.length > 0">
+            <label for="exampleFormControlInput1">Seleccione al Alumno</label>
+            <select class="form-control col-md-10" id="exampleFormControlSelect1" (change)="selectIdPlan($event)">
+              <option>Seleccionar...</option>
+              <option *ngFor="let listplan of listAlumnoPlan" value="{{listplan.id_plan}}">
+                {{listplan.nombre_persona}} {{listplan.apellido_persona}} / {{listplan.nombre_convocatoria}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-6 mt-4">
+              <label style="margin-left:90px;">Documento: </label>
+              <hr style="width: 218px; margin-left: 90px; margin-top: 0px;">
+              <br>
+              <label style="margin-left:90px;">Fecha de Presentacion: </label>
+              <hr style="width: 218px; margin-left: 90px; margin-top: 0px;">
+
+
+
+            </div>
+            <div class="col-6 mt-2">
+              <mat-form-field style="width: 150px;">
+                <ngx-mat-file-input #PPT placeholder="Adjuntar Archivo" [accept]="'.pdf,.pptx'"
+                  (change)="onFilePPT($event)">
+                </ngx-mat-file-input>
+                <mat-icon matSuffix *ngIf="PPT.empty" style="cursor: pointer;">folder</mat-icon>
+                <a mat-icon-button matSuffix *ngIf="!PPT.empty" (click)="PPT.clear($event)" style="cursor: pointer;">
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </mat-form-field>
+              <br>
+              <br>
+
+              <input [(ngModel)]="tramite" class="al let" type="date" id="date" />
+
+            </div>
+            <div class="row">
+              <div class="col mt-3">
+                <div class="row let">
+                  <button type="button" style="margin-left:308px;" class="btn btn-danger al"
+                    (click)="Guardar()">Registrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col col-sm12 col-md-12 col-lg-12 col-xl-12">
+        <div class="table-responsive-sm">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Universidad de Destino</th>
+                <th scope="col">Alumno</th>
+                <th scope="col">Convocatoria</th>
+                <th scope="col">Escuela Profesional</th>
+                <th scope="col">Documento de Presentacion</th>
+                <th scope="col">Fecha de Presentacion</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let listpresent of listPresentaciones| paginate: { itemsPerPage: 2, currentPage: p } ; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{listpresent.nombre_universidad_convenio}}</td>
+                <td>{{listpresent.nombre_persona}} {{listpresent.apellido_persona}}</td>
+                <td>{{listpresent.nombre_convocatoria}}</td>
+                <td>{{listpresent.nombre_escuela}}</td>
+                <td><a href="{{listpresent.ppt}}" target="_blank" style="margin-left:90px;"><i
+                      class="fas fa-file-powerpoint fa-2x" style="color:rgb(202, 105, 14)"></i></a></td>
+                <td>{{listpresent.fecha}}</td>
+                <td><a (click)="eliminar_presentacion(listpresent)" style="margin-left:16px; cursor:pointer;">
+                  <i class="fas fa-trash-alt fa-2x" style="color: rgb(112, 24, 24);"></i>
+                </a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-left:475px;">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

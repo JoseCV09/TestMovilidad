@@ -1,0 +1,47 @@
+<div *ngIf="existe">
+    <div *ngIf="loading" style="width: 230px; height: 100px;">
+        <i style="float: left;" class="fa fa-refresh fa-spin "></i>
+        <p class="text-muted" style="float: right;">Buscando Convocatorias ....</p>
+    </div>
+    <div *ngIf="!loading">
+        <h4>Su Escuela no tiene convocatorias Aperturadas </h4><br>
+        <h4>Comunicarse con su Director de Escuela</h4>
+    </div>
+</div>
+
+
+
+
+<div *ngIf="!existe">
+    <p class="text-muted">Convocatorias a Postular</p>
+    <!-- 
+     <h4>Convocatorias a Postular</h4><br><br>
+     
+-->
+
+
+    <div class="card-deck">
+
+        <div class="card border-success mb-4" style="max-width: 450px;" *ngFor="let convocatoria of convocatorias">
+            <div class="card-header">{{convocatoria.nombre_convocatoria}} to {{convocatoria.nombre_universidad_convenio}}</div>
+
+            <div class="card-body text-secondary">
+                <img src="{{convocatoria.imagen}}" class="card-img-top">
+                <div class="card-body" style="height: 210px;">
+                    <div class="col">
+                        <p> <strong> Convocatoria : </strong>{{convocatoria.nombre_convocatoria}}</p>
+                        <p> <strong> Fecha Limite de Postulacion : </strong>{{convocatoria.fecha_presentacion}}</p>
+                        <p>
+                            <Strong> Universidad Destino: </Strong>{{convocatoria.nombre_universidad_convenio}}</p>
+                        <p><strong> Requisitos: </strong>{{convocatoria.requisitos}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-success" style="text-align: center;">
+                <button class="btn btn-success" style="width: 250px;" (click)="postular(convocatoria)">Postular</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-light" style="background: linear-gradient(rgb(108, 26, 63),rgb(75, 17, 43),rgb(31, 9, 19))">
+    <a class="navbar-brand" id="sidebarCollapse" style="cursor: pointer;">
+        <span class="iconify" data-icon="mdi:format-align-left" data-inline="false" data-width="35" data-height="35" style="color: white"></span>
+    </a>
+
+
+    <div class="flexContainer" style="display:flex;align-items:center;">
+        <div class="customSpan" style="margin-top:9px;">
+            <img data-toggle="dropdown" src="{{user.foto}}" alt="" style="width: 50px; height: 50px; border-radius: 10px; margin-right:10px; float:left;">
+            <!--   
+                <a href="{{user.foto}}"> </a>
+          -->
+
+            <a style="color: white; margin-right:100px;  float:left;">{{user.nombre_persona}}
+                {{user.apellido_persona}}
+            </a>
+            <br>
+            <a style="color: white; float:left;">{{escuela}}
+            </a>
+
+            <div class="btn-group dropleft" id="data" style="margin-top: 27px; margin-left: 70px;">
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" (click)="ejecutar()">Salir &nbsp;<span class="iconify" data-icon="mdi:location-exit" data-inline="false" style="color: black;" data-width="20" data-height="20" data-rotate="90deg" data-flip="horizontal,vertical"></span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item">Configuacion de perfil &nbsp;<span class="iconify" data-icon="mdi:cog" data-inline="false" data-width="20" data-height="20"></span></a>
+                </div>
+            </div>
+
+
+            <!--   <a style="color: white;" href="#">
+                boton de salir
+                <button class="btn btn-secondary">salir</button>
+            </a>
+            -->
+        </div>
+    </div>
+</nav>

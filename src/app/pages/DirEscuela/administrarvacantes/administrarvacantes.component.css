@@ -1,0 +1,40 @@
+.up {
+    background-color: rgb(108, 26, 63);
+    color: white;
+    font-size: 11px;
+    text-align: center;
+}
+
+.al {
+    width: 150px;
+    height: 30px;
+}
+
+.linea {
+    width: 150px;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+.let {
+    font-size: 12px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+}
+
+.colf {
+    /* background-color: rgb(119, 185, 88);
+    background-color: rgb(168, 208, 141)
+     */
+    color: green;
+}
+
+.dec {
+    color: red;
+}

@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+    <!-- Sidebar Content-->
+
+    <nav id="sidebar">
+        <ul class="list-unstyled components let">
+
+            <li routerLinkActive="active" *ngFor="let opcion of opcionesU">
+                <a href="" [routerLink]="['pages/',  opcion.ruta]">
+                    <i class="{{opcion.icon}}"></i> {{opcion.nombre_opciones}}
+                </a>
+                <hr style="width: 200px;" />
+            </li>
+
+
+            <!--      <li routerLinkActive="active">
+                <a href="" [routerLink]="['pages/administrarVacantes']">
+                    <i class="fas fa-plane-departure fa-lg"></i> Administrar vacante
+                </a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/aperturarConvocatoria']">
+                    <i class="fas fa-unlock-alt fa-lg"></i> &nbsp; Aperturar Convocatoria</a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/adjuntarConvocatoria']">
+                    <i class="fas fa-file-alt fa-lg"></i>&nbsp;Adjuntar Documentos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;de Convocatoria
+                </a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/recepcionarDocumentosOCNI']">
+                    <i class="fas fa-clipboard-check fa-lg"></i> &nbsp;Recepcionar Docs. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de Convocatoria OCNI</a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/recepcionarDocumentosDirEscuela']">
+                    <i class="fas fa-clipboard-check fa-lg"></i>&nbsp;Recepcionar Docs. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de Convocatoria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dir.Escuela
+                </a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/seleccionarDocumentos']">
+                    <i class="far fa-id-card fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar Documentos al Estudiante</a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/adjuntarDocumentosSolicitados']">
+                    <i class="fas fa-file-upload fa-lg"></i>&nbsp;Adjuntar Documentos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solicitados
+                </a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/recepcionarDocumentosSolicitados']">
+                    <i class="fas fa-file-upload fa-lg"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recepcionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documentos Solicitados</a>
+                <hr style="width: 200px;" />
+            </li>
+
+            <li routerLinkActive="active">
+                <a href="#" [routerLink]="['pages/registroPlan']">
+                    <span class="iconify" data-icon="ic:round-note-add" data-inline="false" style="width: 30px; height: 30px;"></span
+          >&nbsp;&nbsp;Registrar Plan MAE</a
+        >
+        <hr style="width: 200px;" />
+      </li>
+
+      <li routerLinkActive="active">
+        <a href="#" [routerLink]="['pages/verPlanAprobadoOCNI']">
+          <span
+            class="iconify"
+            data-icon="mdi:file-eye"
+            data-inline="false"
+            style="width: 30px; height: 30px;"
+          ></span
+          >&nbsp;Ver Plan Aprobado
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OCNI</a
+        >
+        <hr style="width: 200px;" />
+      </li>
+
+      <li routerLinkActive="active">
+        <a href="#" [routerLink]="['pages/aprobarPlanConsejoUniversitario']">
+          <span
+            class="iconify"
+            data-icon="mdi:file-check"
+            data-inline="false"
+            style="width: 30px; height: 30px;"
+          ></span
+          >&nbsp;Aprobar Plan Consejo
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Universitario</a
+        >
+        <hr style="width: 200px;" />
+      </li>
+
+      <li routerLinkActive="active">
+        <a href="#" [routerLink]="['pages/registrarConstanciaFinanciera']">
+          <span
+            class="iconify"
+            data-icon="ic:round-note-add"
+            data-inline="false"
+            style="width: 30px; height: 30px;"
+          ></span> &nbsp;Registrar Constancia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Financiera
+                </a>
+                <hr style="width: 200px;" />
+            </li>
+            -->
+        </ul>
+
+        <ul>
+            <div class="container">
+                <p>
+                    &copy; Klein Keep
+                </p>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <div class="container-fluid" style="padding: 25px; background-color: white;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

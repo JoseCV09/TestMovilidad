@@ -1,0 +1,28 @@
+.up {
+  background-color: rgb(108, 26, 63);
+  color: white;
+  font-size: 13px;
+}
+.let {
+  font-size: 11px;
+}
+.sin {
+  border: none;
+  background-color: #ffffff;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+.sin {
+  border: none;
+  background-color: #ffffff;
+}
+.custom-pagination ::ng-deep .ngx-pagination {
+  text-align: right;
+}
+.custom-pagination ::ng-deep .ngx-pagination .current {
+  background: #6c1a3f;
+}

@@ -1,0 +1,79 @@
+#hrplantilla{
+    background-color: rgb(108, 26, 63);
+    height: 3px;
+    margin-bottom: 30px;
+}
+.back {
+    border: none;
+    background-color: #ffffff;
+  }
+.icon {
+    color: rgb(204, 197, 102);
+    cursor: pointer;
+}
+.reloj{
+    margin-left: 40px;
+    color: rgb(207, 194, 3);
+    width: 30px;
+    height: 30px;
+}
+.aprobar{ 
+    cursor: pointer;
+    color: rgb(3, 190, 59);
+    width: 28px;
+    height: 28px;
+}
+.aprobar2{
+    margin-left:80px;
+    color: rgb(3, 190, 59);
+    width: 28px;
+    height: 28px;
+}
+.denegar{
+    cursor: pointer;
+    color: rgb(197, 21, 21);
+    width: 28px;
+    height: 28px;
+}
+.denegar2{
+    margin-left:44px;
+    color: rgb(197, 21, 21);
+    width: 28px;
+    height: 28px;
+}
+.eliminar{
+    cursor: pointer;
+    margin-left: 20px;
+    color: rgb(105, 7, 7);
+    width: 28px;
+    height: 25px;
+}
+.eliminar2{
+    cursor: pointer;
+    margin-left: 60px;
+    color: rgb(105, 7, 7);
+    width: 28px;
+    height: 25px;
+}
+.habilitar{
+    cursor: pointer;
+    margin-left:23px;
+    margin-bottom: 20px;
+    color: rgb(3, 190, 59);
+    width: 34px;
+    height: 30px;
+}
+.denegar3{
+    margin-left:44px;
+    color: rgb(197, 21, 21);
+    width: 28px;
+    height: 28px;
+}
+.restaurar{
+    cursor: pointer;
+    margin-left:23px;
+    margin-bottom: 20px;
+    color: rgb(3, 190, 59);
+    width: 34px;
+    height: 30px;
+}

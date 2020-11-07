@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col-xl-12">
+    <br>
+    <FONT FACE="courier" SIZE=10 style="margin-left:40px; margin-top:10px;">VER PLANES APROBADOS: DIR.ESCUELA / OCNI
+    </FONT>
+    <br><br>
+
+
+    <select class="form-control" [(ngModel)]="opcionSeleccionado" (change)="FiltrarTablas()"
+      style="width: 240px; margin-left: 900px;">
+      <option value="0">Selecciona una opción</option>
+      <option *ngFor="let dato of datos">
+        {{dato}}
+      </option>
+    </select>
+    <br><br>
+
+    <div style="margin-top:20px;" *ngIf="espera">
+      <label for="" style="margin-left:230px;">Planes en Espera / Consejo Universitario</label>
+      <hr style="width: 285px; margin-left: 230px; margin-top: 0px;">
+      <table class="table table-hover" style="margin-left:230px; width:800px;">
+        <thead class="thead">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Alumno</th>
+            <th scope="col">Escuela</th>
+            <th scope="col">Convocatoria</th>
+            <th scope="col">Doc. Plan</th>
+            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+            <th scope="col">Oficina Coop. Nacional e Internacional</th>
+            <th colspan="2">Aprobar/ Denegar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let listaespera of listPlanesConsejoEspera | paginate: { itemsPerPage: 2, currentPage: p }; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{listaespera.nombre_persona}} {{listaespera.apellido_persona}}</td>
+            <td>{{listaespera.nombre_escuela}}</td>
+            <td>{{listaespera.nombre_convocatoria}}</td>
+            <td><a href="{{listaespera.doc_plan}}" target="_blank" style="margin-left:8px;"><i
+                  class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>
+            <td><span class="iconify aprobar2" data-icon="bi:check-circle-fill" data-inline="false"></span></td>
+            <td><span class="iconify aprobar2" data-icon="bi:check-circle-fill" data-inline="false"></span></td>
+            <td><a (click)="consejo_espera_positivo(listaespera)"><span class="iconify aprobar"
+                  data-icon="bi:check-circle-fill" data-inline="false"></span></a></td>
+            <td><a (click)="consejo_espera_negativo(listaespera)"><span class="iconify denegar"
+                  data-icon="whh:circledelete" data-inline="false"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left:185px;">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+
+    <br>
+    <div style="margin-top:20px;" *ngIf="aprobados">
+      <label for="" style="margin-left:230px;">Planes Aprobados / Consejo Universitario</label>
+      <hr style="width: 184px; margin-left: 300px; margin-top: 0px;">
+      <table class="table table-hover" style="margin-left:230px; width:800px;">
+        <thead class="thead">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Alumno</th>
+            <th scope="col">Escuela</th>
+            <th scope="col">Convocatoria</th>
+            <th scope="col">Doc. Plan</th>
+            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+            <th scope="col">Oficina Coop. Nacional e Internacional</th>
+            <th scope="col">Consejo Universitario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let listaconsejoaprobados of listPlanesConsejoAprobados | paginate: { itemsPerPage: 2, currentPage: p1 }; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{listaconsejoaprobados.nombre_persona}} {{listaconsejoaprobados.apellido_persona}}</td>
+            <td>{{listaconsejoaprobados.nombre_escuela}}</td>
+            <td>{{listaconsejoaprobados.nombre_convocatoria}}</td>
+            <td><a href="{{listaconsejoaprobados.doc_plan}}" target="_blank" style="margin-left:8px;"><i
+                  class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>
+            <td><span class="iconify aprobar2" data-icon="bi:check-circle-fill" data-inline="false"></span></td>
+            <td><span class="iconify aprobar2" data-icon="bi:check-circle-fill" data-inline="false"></span></td>
+            <td><span class="iconify aprobar2" data-icon="bi:check-circle-fill" data-inline="false"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left:185px;">
+        <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
+      </div>
+    </div>
+
+
+    <div style="margin-top:20px;" *ngIf="denegados">
+      <label for="" style="margin-left:230px;">Planes Denegados</label>
+      <hr style="width: 150px; margin-left: 230px; margin-top: 0px;">
+      <table class="table table-hover" style="margin-left:230px; width:950px;">
+        <thead class="thead">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Alumno</th>
+            <th scope="col">Escuela</th>
+            <th scope="col">Convocatoria</th>
+            <th scope="col">Doc. Plan</th>
+            <th scope="col">Decano, Dir.Financiero, Cons.Facultad</th>
+            <th scope="col">Habilitar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let listaconsejodenegados of listPlanesConsejoDenegados | paginate: { itemsPerPage: 2, currentPage: p2 }; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{listaconsejodenegados.nombre_persona}} {{listaconsejodenegados.apellido_persona}}</td>
+            <td>{{listaconsejodenegados.nombre_escuela}}</td>
+            <td>{{listaconsejodenegados.nombre_convocatoria}}</td>
+            <td><a href="{{listaconsejodenegados.doc_plan}}" target="_blank" style="margin-left:8px;"><i
+                  class="fas fa-file-powerpoint fa-lg" style="color:rgb(124, 120, 136);"></i></a></td>
+            <td><span class="iconify denegar2" data-icon="whh:circledelete" data-inline="false"></span>
+            </td>
+            <td><a (click)="consejo_habilitar(listaconsejodenegados)"><span class="iconify habilitar"
+                  data-icon="mdi:clock-check" data-inline="false"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left:185px;">
+        <pagination-controls (pageChange)="p2 = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="content">
+        <div class="row">
+            <div class="col">
+                <h4>Adjuntar Documentos de Convocatoria</h4>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p><strong>Convocatoria: </strong>{{nombre}}</p>
+                    </div>
+                    <div class="col">
+                        <p><strong>Universidad Destino: </strong>{{universidad}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="content mb-4" style="margin-top: 40px;">
+        <div class="row row-cols-1 row-cols-md-2">
+
+
+            <div class="col mb-4">
+                <h6 class="pl">Plantillas de documentos Solicitados</h6>
+                <hr>
+
+                <table class="table table-bordered tb">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Nombre de Documento</th>
+                            <th scope="col">Opcion</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let lista of list, let i =index">
+                            <th scope="row">{{i +1}}</th>
+                            <td>{{lista.nombre_documento}}</td>
+                            <td>
+
+                                <a *ngIf="lista.link != null" href="{{lista.link}}" target="_blank">
+                                    <span class="iconify icon" data-icon="mdi:link" data-inline="false" data-width="30" data-height="30"></span>
+                                </a>
+
+                                <a *ngIf="lista.link == null" target="_blank">
+                                    <span class="iconify" data-icon="gridicons:link-break" data-inline="false" style="color: grey;" data-width="25" data-height="25"></span>
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Registro -->
+            <div class="col mb-4" *ngIf="true">
+                <h6 class="pl">Adjuntar</h6>
+                <hr>
+
+
+                <div class="row let">
+
+                    <div class="container" *ngIf="pendiente" style="margin-top: 25px;">
+                        <p>Ha adjuntado todos los archivos solicitados, comuniquese con si director de escuela para volver a habilidar el envio de los archivos solicitados</p>
+                    </div>
+
+                    <div class="row let " style="margin-top: 40px;" *ngFor="let lista of listadjuntar">
+                        <div class="col" style="text-align: center; font-size: 13px; margin-top: 15px;">
+                            <label for="">{{lista.nombre_documento}}</label>
+                        </div>
+
+                        <div class="col" style="margin-left: 50px;">
+
+                            <mat-form-field style="width: 150px;">
+                                <ngx-mat-file-input #solicitudMae placeholder="Adjuntar Archivo" [accept]="'.pdf'" (change)="onFile($event, lista)">
+                                </ngx-mat-file-input>
+                                <mat-icon matSuffix *ngIf="solicitudMae.empty" style="cursor: pointer;">folder</mat-icon>
+
+                                <a mat-icon-button matSuffix *ngIf="!solicitudMae.empty" (click)="solicitudMae.clear($event)" style="cursor: pointer;">
+                                    <mat-icon>clear</mat-icon>
+                                </a>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <div class="row let" style="margin-top: 30px;" *ngIf="!solicitudMae.empty">
+                                <button style="margin-left: auto; margin-right: auto; color: white; background-color: rgb(108, 26, 63);" (click)="Guardar(lista)" type="button" class="btn  al">Enviar</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>

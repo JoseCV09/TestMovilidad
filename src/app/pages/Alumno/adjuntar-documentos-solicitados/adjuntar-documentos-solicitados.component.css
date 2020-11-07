@@ -1,0 +1,26 @@
+hr {
+    background-color: rgb(108, 26, 63);
+    height: 3px;
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.tb {
+    width: 350px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+}
+
+.pl {
+    text-align: center;
+}
+
+.let {
+    margin-top: -30px;
+    font-size: 13px;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}

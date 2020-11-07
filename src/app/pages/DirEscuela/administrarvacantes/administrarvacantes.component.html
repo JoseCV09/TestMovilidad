@@ -1,0 +1,298 @@
+<div class="row row-cols-1 row-cols-md-4 let">
+    <div class="col mb-3">
+        <div class="card-body">
+            <label for="">Universidad Convenio</label>
+            <hr class="linea" />
+            <select class="custom-select custom-select-sm let al" (change)="onChange($event)">
+        <option value="-1">Select University</option>
+        <option
+          *ngFor="let universidad of universidades"
+          value="{{ universidad.id_universidad_convenio }}"
+          >{{ universidad.nombre_universidad_convenio }}</option
+        >
+      </select>
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card-body">
+            <label for="telefono">Telefono</label>
+            <hr class="linea" />
+            <input *ngIf="vacio" class="form-control al let" disabled value="{{ universidadSelect[0].telefono }}" type="text" name="telefono" id="telefono" />
+            <input *ngIf="!vacio" class="form-control al let" disabled type="text" name="telefono" id="telefono" />
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card-body">
+            <label for="cargo">Nombre Convocatoria</label>
+            <hr class="linea" />
+            <input class="form-control al let {{ validarnom }}" [(ngModel)]="convocatoria.nombre_convocatoria" type="text" name="cargo" id="cargo" />
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card-body">
+            <label for="">N. Vacantes</label>
+            <hr class="linea" />
+            <input [(ngModel)]="convocatoria.nro_vacantes" class="form-control al let {{ validarvac }}" type="number" name="nro_vacantes" id="vacantes" />
+        </div>
+    </div>
+
+    <div class="col mb-3" style="height: 130px;">
+        <div class="card-body">
+            <label for="contacto">Contacto</label>
+            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;" />
+            <input *ngIf="vacio" class="form-control al let" value="{{ universidadSelect[0].contacto }}" disabled type="text" name="contacto" id="contacto" />
+            <input *ngIf="!vacio" class="form-control al let" disabled type="text" name="contacto" id="contacto" />
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card-body">
+            <label for="email">Email</label>
+            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;" />
+            <input *ngIf="vacio" class="form-control al let" disabled value="{{ universidadSelect[0].email }}" type="text" name="email" id="email" />
+            <input *ngIf="!vacio" class="form-control al let" disabled type="text" name="email" id="email" />
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card-body">
+            <label for="">Escuela Profesional</label>
+            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;" />
+            <input class="form-control al let" disabled value="{{ nombreescuela }}" type="text" />
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card-body" style="padding-bottom: 3px;">
+            <label for="">Requisitos - Perfil</label>
+            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;" />
+            <input [(ngModel)]="convocatoria.requisitos" class="form-control al let" type="text" name="" id="" />
+        </div>
+
+        <div class="card-body" style="padding-top: 0px;">
+            <label for="">Fecha de Presentacion </label><br />
+            <label for="">de documentos</label>
+            <hr style="width: 150px; margin-left: 0px; margin-top: 0px;" />
+
+            <input [(ngModel)]="convocatoria.fecha_presentacion" class="al let" type="date" id="date" />
+        </div>
+    </div>
+
+    <div class="col mb-3" style="margin-top: -110px;" *ngIf="validgua">
+        <div class="card-body">
+            <hr class="linea" />
+            <button (click)="Guardar()" class="btn al let is-invalid" style="background-color: rgb(108, 26, 63); color: white;" [disabled]="loading">
+        <i
+          [ngClass]="{ 'fa-save': !loading, 'fa-refresh fa-spin': loading }"
+          class="fa fa-save"
+          style="margin-right: 5px;"
+        ></i>
+        <span *ngIf="!loading">Guardar</span>
+        <span *ngIf="loading">Guardando..</span>
+      </button>
+            <div class="invalid-feedback" *ngIf="validar">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col mb-3" style="margin-top: -110px;" *ngIf="validedit">
+        <div class="card-body">
+            <hr class="linea" />
+            <button (click)="Actualizar()" class="btn al let is-invalid" style="background-color: rgb(108, 26, 63); color: white;">
+        Actualizar
+      </button>
+            <div class="invalid-feedback" *ngIf="validar">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col mb-3" style="margin-top: -110px; margin-left: -150px;" *ngIf="validedit">
+        <div class="card-body">
+            <hr class="linea" />
+            <button (click)="Cancelar()" class="btn al let is-invalid" style="background-color: rgb(44, 48, 59); color: white;">
+        Cancelar
+      </button>
+            <div class="invalid-feedback" *ngIf="validar">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="container" *ngIf="false">
+    <table class="table table-responsive">
+        <thead class="thead up">
+            <tr>
+                <th scope="col ">#</th>
+                <th scope="col ">Universidad Anfitriona</th>
+                <th scope="col ">Convocatoria</th>
+                <th scope="col ">N vacantes</th>
+                <th scope="col ">Escuela Profesional</th>
+                <th scope="col ">Requisitos</th>
+                <th scope="col ">Fecha de presentacion</th>
+                <th scope="col ">Contacto</th>
+                <th scope="col ">Universidad</th>
+                <th colspan="2 ">
+                    Accion<span class="iconify icon" data-icon="mdi:border-color " data-inline="false " style="color: rgb(192, 185, 80);" data-width="25 " data-height="25 "></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="let">
+            <tr *ngFor="let convocatoria of convocatorias; let i = index">
+                <th scope="row ">{{ i + 1 }}</th>
+                <td>{{ convocatoria.universidad_anfitriona }}</td>
+                <td>{{ convocatoria.nombre_convocatoria }}</td>
+                <td>{{ convocatoria.nro_vacantes }}</td>
+                <td>{{ convocatoria.nombre_escuela }}</td>
+                <td>
+                    <span class="iconify icon" data-icon="mdi:eye-settings-outline" data-inline="false" style="color: rgb(138, 138, 238);" data-width="25" data-height="25"></span>
+                </td>
+                <td>{{ convocatoria.fecha_presentacion }}</td>
+                <td>{{ convocatoria.contacto }}</td>
+                <td>{{ convocatoria.nombre_universidad_convenio }}</td>
+                <td>
+                    <a (click)="Editar(convocatoria)">
+                        <span class="iconify icon" data-icon="mdi:pencil" data-inline="false" style="color: black;" data-width="25" data-height="25"></span>
+                    </a>
+                </td>
+                <td>
+                    <a (click)="Eliminar(convocatoria)">
+                        <span class="iconify icon" data-icon="mdi:trash-can-outline" data-inline="false" style="color: black;" data-width="25" data-height="25"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+-->
+<!-- Angular Material -->
+
+
+<div class="container">
+    <div class="container" style="width: 1000px;">
+
+
+        <div class="col-sm-3" style="margin-left: auto;">
+
+            <mat-form-field>
+                <input matInput (keyup)="filter($event.target.value)" placeholder="Buscar">
+            </mat-form-field>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+
+
+
+    <div class="mat-elevation-z8" style=" margin-left: auto; margin-right: auto; margin-top: 20px; ">
+
+        <table mat-table [dataSource]="dataSource " class="mat-elevation-z8 ">
+
+            <ng-container matColumnDef="Item">
+                <th class="up " mat-header-cell *matHeaderCellDef style="width: 5%;"># </th>
+                <td class="let" mat-cell *matCellDef="let element, let i = index " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }" style="text-align: left;">{{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Universidad Anfitriona">
+                <th class="up " mat-header-cell *matHeaderCellDef> Universidad Anfitriona </th>
+                <td class="let" mat-cell *matCellDef="let element " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }"> {{element.universidad_anfitriona}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="Convocatoria">
+                <th class="up " mat-header-cell *matHeaderCellDef> Convocatoria </th>
+                <td class="let" mat-cell *matCellDef="let element" style="text-align: center;" [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }">{{element.nombre_convocatoria }} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Nro Vacantes">
+                <th class="up " mat-header-cell *matHeaderCellDef> Nro Vacantes </th>
+                <td class="let " mat-cell *matCellDef="let element" style="text-align: center;" [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }"> {{element.nro_vacantes}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Escuela Profesional">
+                <th class="up " mat-header-cell *matHeaderCellDef> Escuela Profesional </th>
+                <td class="let" mat-cell *matCellDef="let element " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }"> {{element.nombre_escuela}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Requisitos">
+                <th class="up " mat-header-cell *matHeaderCellDef>Requisitos</th>
+                <td class="let" mat-cell *matCellDef="let element " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }">
+                    <a (click)="requisitos(element.requisitos)" data-toggle="modal" data-target="#staticBackdrop">
+                        <span class="iconify icon" data-icon="mdi:eye-settings-outline" data-inline="false" style="color: rgb(138, 138, 238);" data-width="25" data-height="25"></span>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Fecha de Presentacion">
+                <th class="up " mat-header-cell *matHeaderCellDef> Fecha de Presentacion </th>
+                <td class="let" mat-cell *matCellDef="let element " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }"> {{element.fecha_presentacion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Contacto">
+                <th class="up " mat-header-cell *matHeaderCellDef> Contacto </th>
+                <td class="let" mat-cell *matCellDef="let element " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }"> {{element.contacto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Universidad">
+                <th class="up " mat-header-cell *matHeaderCellDef style="width: 15%; text-align: center;"> Universidad </th>
+                <td class="let " mat-cell *matCellDef="let element " [ngClass]="{'colf': element.estado == '2', 'dec' : element.estado == '3' }">{{element.nombre_universidad_convenio}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Accion">
+                <th class="up " mat-header-cell *matHeaderCellDef style="width: 10%; text-align: center;"> Accion </th>
+                <td mat-cell *matCellDef="let element ">
+
+                    <a (click)="Editar(element)">
+                        <span class="iconify icon" data-icon="mdi:pencil" data-inline="false" style="color: black;" data-width="25" data-height="25"></span>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a (click)="Eliminar(element)">
+                        <span class="iconify icon" data-icon="mdi:trash-can-outline" data-inline="false" style="color: black;" data-width="25" data-height="25"></span>
+                    </a>
+
+                </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 3, 20] " showFirstLastButtons></mat-paginator>
+
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+
+
+<!-- Modal -->
+<div class="modal fade " id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Requisitos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <p>{{requisito}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

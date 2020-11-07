@@ -1,0 +1,210 @@
+<div class="container">
+
+    <div class="container" style="text-align: left;">
+        <div>
+            <h1>Documentos de Postulacion</h1>
+            <p class="text-muted">Solicita Documentos a los alumnos elegidos para participar el la Movilidad Academica</p>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="container" style=" margin-top: 100px;">
+        <div class="container" style="width: 1000px;">
+
+
+            <div class="col-sm-3" style="margin-left: auto;">
+
+                <mat-form-field>
+                    <input matInput (keyup)="filter($event.target.value)" placeholder="Buscar alumno">
+                </mat-form-field>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mat-elevation-z8 " style=" margin-left: auto; margin-right: auto; margin-top: 20px; ">
+
+        <table mat-table [dataSource]="dataSource " class="mat-elevation-z8 ">
+
+            <ng-container matColumnDef="Item">
+                <th class="up " mat-header-cell *matHeaderCellDef>Item </th>
+                <td mat-cell *matCellDef="let element, let i = index "> {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Convocatoria">
+                <th class="up " mat-header-cell *matHeaderCellDef> Convocatoria </th>
+                <td mat-cell *matCellDef="let element "> {{element.nombre_convocatoria}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="Nombre y Apellido">
+                <th class="up " mat-header-cell *matHeaderCellDef> Nombre y Apellido </th>
+                <td mat-cell *matCellDef="let element">{{element.nombre_persona }} {{element.apellido_persona}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Telefono">
+                <th class="up " mat-header-cell *matHeaderCellDef> Telefono </th>
+                <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Ciclo">
+                <th class="up " mat-header-cell *matHeaderCellDef> Ciclo </th>
+                <td mat-cell *matCellDef="let element "> {{element.ciclo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Docuementos Extra">
+                <th class="up " mat-header-cell *matHeaderCellDef style=" width: 80px; ">Docuementos Extra</th>
+                <td mat-cell *matCellDef="let element " style="text-align: center; ">
+                    <a (click)="modal(element.id_presentacion_documentos)" data-toggle="modal" data-target="#exampleModal">
+                        <span style="cursor: pointer;" class="iconify" data-icon="ri:add-circle-fill" data-inline="false" data-width="25" data-height="25"></span>
+                    </a>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 3, 20] " showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+
+
+<!-- Modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Documentos a Solicitar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Curriculm Vitae
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(8, '2')" *ngIf="curri">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(8, '1')" *ngIf="!curri">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        </span>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Certificado de Salud
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(9, '2')" *ngIf="certi">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(9, '1')" *ngIf="!certi">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        <!--
+                                    <i [ngClass]="{' fa-window-close': ver == 1 , ' fa-file-word': ver == 2  }"  class="fa "></i>    
+                        -->
+                        </span>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Antecedentes Policiales
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(10, '2')" *ngIf="ante">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(10, '1')" *ngIf="!ante">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        <!--
+                                    <i [ngClass]="{' fa-window-close': ver == 1 , ' fa-file-word': ver == 2  }"  class="fa "></i>    
+                        -->
+                        </span>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Copia de Pasaporte
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(11,'2')" *ngIf="pasa">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(11, '1')" *ngIf="!pasa">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        <!--
+                                    <i [ngClass]="{' fa-window-close': ver == 1 , ' fa-file-word': ver == 2  }"  class="fa "></i>    
+                        -->
+                        </span>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Copia de DNI
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(12, '2')" *ngIf="dni">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(12, '1')" *ngIf="!dni">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        <!--
+                                    <i [ngClass]="{' fa-window-close': ver == 1 , ' fa-file-word': ver == 2  }"  class="fa "></i>    
+                        -->
+                        </span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Constancia de Responsabilidad Financiera
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(13, '2')" *ngIf="fina">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(13, '1')" *ngIf="!fina">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        <!--
+                                    <i [ngClass]="{' fa-window-close': ver == 1 , ' fa-file-word': ver == 2  }"  class="fa "></i>    
+                        -->
+                        </span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        Constancia de dominio de Idioma extranjero
+                        <span class="badge badge-pill" style="cursor: pointer;">    
+                        <a (click)="cambiar(14, '2')" *ngIf="idi">
+                            <span  class="iconify"  data-icon="bi-check-all" data-inline="false" style="color: green;" data-width="25" data-height="25"></span>
+                        </a>
+                        <a (click)="cambiar(14, '1')" *ngIf="!idi">
+                            <span class="iconify" data-icon="feather:x" data-inline="false" style="color: red;" data-width="25" data-height="25"></span>
+                        </a>
+                        <!--
+                                    <i [ngClass]="{' fa-window-close': ver == 1 , ' fa-file-word': ver == 2  }"  class="fa "></i>    
+                        -->
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>

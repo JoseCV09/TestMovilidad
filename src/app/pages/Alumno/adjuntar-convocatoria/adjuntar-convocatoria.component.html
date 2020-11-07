@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="content">
+        <div class="row">
+            <div class="col">
+                <h4>Adjuntar Documentos de Convocatoria</h4>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p><strong>Convocatoria: </strong>{{concocatoria.nombre_convocatoria}}</p>
+                        <p><strong>Fecha Limite de Presentacion: </strong>{{concocatoria.fecha_presentacion}}</p>
+                    </div>
+                    <div class="col">
+                        <p><strong>Universidad Destino: </strong>{{concocatoria.universidad_anfitriona}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="content mb-4" style="margin-top: 40px;">
+        <div class="row row-cols-1 row-cols-md-2">
+
+
+            <div class="col mb-4">
+                <h6 class="pl">Plantillas</h6>
+                <hr>
+
+                <table class="table table-bordered tb">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Nombre de Documento</th>
+                            <th scope="col">Opcion</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Carta de Motivacion MAE</td>
+                            <td>
+                                <a href="https://firebasestorage.googleapis.com/v0/b/fir-files-512e9.appspot.com/o/Carta%20de%20Motivacion%20MAe.pdf?alt=media&token=c970d172-31c3-40f9-88de-42c07bf8310b" target="_blank">
+                                    <span class="iconify icon" data-icon="mdi:link" data-inline="false" data-width="30" data-height="30"></span>
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Solicitud MAE</td>
+                            <td>
+                                <a href="https://firebasestorage.googleapis.com/v0/b/fir-files-512e9.appspot.com/o/Solitud%20Mae%20Pantilla.pdf?alt=media&token=de390b4f-a089-49b3-8199-66eec51205a8" target="_blank">
+
+                                    <span class="iconify icon" data-icon="mdi:link" data-inline="false" data-width="30" data-height="30"></span>
+                                </a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Registro -->
+            <div class="col mb-4">
+                <h6 class="pl">Registro</h6>
+                <hr>
+
+                <div class="row row-cols-1 row-cols-md-2 let ">
+
+                    <div class="col mb-2">
+                        <div class="card-body">
+                            <label for="">Nombre</label>
+                            <input value="{{alumno[0].nombre_persona}}" class="form-control al" disabled type="text" name="" id="">
+                        </div>
+                    </div>
+
+                    <div class="col mb-2">
+                        <div class="card-body">
+                            <label for="">Numero Celular</label>
+                            <input value="{{alumno[0].telefono}}" class="form-control al" disabled type="text" name="" id="">
+                        </div>
+                    </div>
+
+                    <div class="col mb-2">
+                        <div class="card-body">
+                            <label for="">Apellidos</label>
+                            <input value="{{alumno[0].apellido_persona}}" class="form-control al" disabled type="text" name="" id="">
+                        </div>
+                    </div>
+
+                    <div class="col mb-2">
+                        <div class="card-body">
+                            <label for="" style="font-size: 12px;">Escuela Profesional</label>
+                            <input value="{{alumno[0].nombre_escuela}}" class="form-control al" disabled type="text" name="" id="">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="row let">
+                    <div class="row let " style="margin-top: 40px;">
+                        <div class="col" style="text-align: center; font-size: 13px; margin-top: 15px;">
+                            <label for="">Adjuntar Solicitud MAE</label>
+                        </div>
+                        <div class="col" style="margin-left: 50px;">
+
+                            <mat-form-field style="width: 150px;">
+                                <ngx-mat-file-input #solicitudMae placeholder="Adjuntar Archivo" [accept]="'.pdf'" (change)="onFileSolicitud($event)">
+                                </ngx-mat-file-input>
+                                <mat-icon matSuffix *ngIf="solicitudMae.empty" style="cursor: pointer;">folder</mat-icon>
+
+                                <a mat-icon-button matSuffix *ngIf="!solicitudMae.empty" (click)="solicitudMae.clear($event)" style="cursor: pointer;">
+                                    <mat-icon>clear</mat-icon>
+                                </a>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row let" style="margin-top: 25px;">
+                        <div class="col" style="text-align: center; font-size: 11px;">
+                            <label for="">Adjuntar Carta de Motivacion MAE</label>
+                        </div>
+
+                        <div class="col" style="margin-left: 50px;">
+                            <mat-form-field style="width: 150px;">
+                                <ngx-mat-file-input (change)="onFileCarta($event)" #removableInput placeholder="Adjuntar Archivo" [accept]="'.pdf'">
+                                </ngx-mat-file-input>
+                                <mat-icon matSuffix *ngIf="removableInput.empty" style="cursor: pointer;">folder</mat-icon>
+
+                                <a mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)" style="cursor: pointer;">
+                                    <mat-icon>clear</mat-icon>
+                                </a>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row let" style="margin-top: 30px;" *ngIf="!cargados">
+                    <button style="margin-left: auto; margin-right: auto; color: white; background-color: rgb(108, 26, 63);" (click)="Guardar()" type="button" class="btn  al">Enviar</button>
+                </div>
+
+                <div class="let" style="width: 150px; margin-top: 50px;" *ngIf="cargados">
+                    <div class="progress" style="background-color: rgb(44, 48, 59);">
+                        <div class="progress-bar progre" role="progressbar" [ngStyle]="{'width': archivos[1].progreso + '%'}"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

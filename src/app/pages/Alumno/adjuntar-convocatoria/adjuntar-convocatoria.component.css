@@ -1,0 +1,46 @@
+.pl {
+    text-align: center;
+}
+
+hr {
+    background-color: rgb(108, 26, 63);
+    height: 3px;
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.tb {
+    width: 350px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+}
+
+.icon {
+    color: rgb(204, 197, 102);
+    cursor: pointer;
+}
+
+.let {
+    margin-top: -30px;
+    font-size: 13px;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.al {
+    width: 150px;
+    height: 30px;
+    font-size: 13px;
+}
+
+.progre {
+    background-color: rgb(108, 26, 63);
+}
+
+.bar {
+    background-color: rgb(44, 48, 59);
+    width: 20px;
+}

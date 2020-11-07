@@ -1,0 +1,207 @@
+<div class="container-fluid">
+  <div class="content">
+    <h4>
+      Documentos de Postulación
+    </h4>
+    <p class="text-muted" style="margin-top: 10px;">
+      En esta seccion puede ver los documentos de postulantes
+    </p>
+    <!--BUSCAR-->
+    <div class="col">
+      <div class="container" style="margin-top: 50px;">
+        <div class="row">
+          <div class="col-sm-8"></div>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"
+                  ><span
+                    class="iconify"
+                    data-icon="dashicons:search"
+                    data-inline="false"
+                    style="width: 20px; height: 20px;"
+                  ></span
+                ></span>
+              </div>
+              <input
+                name="documentosOcniPost"
+                [(ngModel)]="documentosOcniPost"
+                type="text"
+                class="form-control"
+                placeholder="Buscar alumno"
+              />
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+          <!--TABLE -->
+
+          <div class="container">
+            <table class="table table-responsive" style="margin-top: 50px;">
+              <thead class="thead up">
+                <tr>
+                  <th scope="col ">#</th>
+                  <th scope="col ">Nombre</th>
+                  <th scope="col ">Apellido</th>
+                  <th scope="col ">Numero de celular</th>
+                  <th scope="col ">Escuela Profesional</th>
+                  <th scope="col ">Carta de Motivacion</th>
+                  <th scope="col ">Solicitud MAE</th>
+                  <th scope="col ">Nombre Convocatoria</th>
+                  <th scope="col ">Universidad destino</th>
+
+                  <th colspan="2">Accion</th>
+                </tr>
+              </thead>
+              <tbody class="let">
+                <tr
+                  *ngFor="
+                    let preseDocs of presentacionDocumentos
+                      | documentosOcni: documentosOcniPost
+                      | paginate: { itemsPerPage: 5, currentPage: p };
+                    let i = index
+                  "
+                >
+                  <th scope="row ">{{ i + 1 }}</th>
+                  <td>{{ preseDocs.nombre_persona }}</td>
+                  <td>{{ preseDocs.apellido_persona }}</td>
+                  <td>{{ preseDocs.numero_telefono }}</td>
+                  <td>{{ preseDocs.nombre_escuela }}</td>
+                  <td>
+                    <a href="{{ preseDocs.carta_motivacion }}" target="_blank">
+                      <span
+                        class="iconify icon"
+                        data-icon="heroicons-solid:external-link"
+                        data-inline="false"
+                        style="color: rgb(138, 138, 238);"
+                        data-width="25"
+                        data-height="25"
+                      ></span>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ preseDocs.solicitud_mae }}" target="_blank">
+                      <span
+                        class="iconify"
+                        data-icon="heroicons-solid:external-link"
+                        data-inline="false"
+                        style="color: rgb(138, 138, 238);"
+                        data-width="25"
+                        data-height="25"
+                      ></span>
+                    </a>
+                  </td>
+                  <td>{{ preseDocs.nombre_convocatoria }}</td>
+                  <td>{{ preseDocs.nombre_u_convenio }}</td>
+
+                  <td>
+                    <li type="submit" class="sin" (click)="positivo(preseDocs)">
+                      <span
+                        class="iconify"
+                        data-icon="bi:check"
+                        data-inline="false"
+                        style="color: #17a2b8; width: 30; height: 30;"
+                      ></span>
+                    </li>
+                  </td>
+                  <td>
+                    <li type="submit" class="sin" (click)="negativo(preseDocs)">
+                      <span
+                        class="iconify"
+                        data-icon="bx:bx-x"
+                        data-inline="false"
+                        style="color: #e89a00; width: 30; height: 30;"
+                      ></span>
+                    </li>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls
+              class="custom-pagination"
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+          <!--MODAL 01-->
+          <div
+            class="modal fade"
+            id="modal1"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div
+              class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Carta Motivacion
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>{{ carta }}</p>
+                  <!-- <object
+                    data="{ carta }"
+                    class="e2e-inner-html-interpolated"
+                    type="application/pdf"
+                    width="100%"
+                    height="100%"
+                  ></object>-->
+
+                  <!--  <object
+                    data="https://firebasestorage.googleapis.com/v0/b/fir-files-512e9.appspot.com/o/Solitud%20Mae%20Pantilla.pdf?alt=media&token=de390b4f-a089-49b3-8199-66eec51205a8"
+                    type="application/pdf"
+                    width="100%"
+                    height="100%"
+                  >
+                    <p>
+                      Tu navegador no tiene el plugin para previsualizar
+                      documentos pdf.
+                    </p>
+                    <p>
+                      Puedes descargarte el archivo desde
+                      <a href="myfile.pdf">aquí</a>
+                    </p>
+                  </object>-->
+                </div>
+                <div class="modal-footer">
+                  <a
+                    href="https://firebasestorage.googleapis.com/v0/b/fir-files-512e9.appspot.com/o/Solitud%20Mae%20Pantilla.pdf?alt=media&token=de390b4f-a089-49b3-8199-66eec51205a8"
+                    download="SolicitudMAE"
+                  >
+                    <span
+                      class="iconify"
+                      data-icon="heroicons-solid:download"
+                      data-inline="false"
+                    ></span>
+                    Descargar Archivo
+                  </a>
+                  <a href="{{ carta }}" target="_blank">
+                    <span
+                      class="iconify icon"
+                      data-icon="mdi:link"
+                      data-inline="false"
+                      data-width="30"
+                      data-height="30"
+                    ></span
+                    >Abrir
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--HERE DEAD THE MODAL-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

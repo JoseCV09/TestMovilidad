@@ -1,0 +1,190 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col col-sm12 col-md-12 col-lg-12 col-xl-12">
+      <FONT FACE="courier" SIZE=7>REGISTRAR TRAMITE MIGRATORIO</FONT>
+      <div class="row">
+        <div class="col-6">
+          <h3 style="font-family: monospace; color: rgb(0, 12, 80); margin-left:200px; margin-top:18px;">Seleccione al
+            Alumno</h3>
+          <div class="row">
+            <div class="col-6">
+              <hr style="width:350px; margin-left:155px;" id="hrplantilla">
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <h3 style="font-family: monospace; color: rgb(0, 12, 80); margin-left:198px; margin-top:18px;">Adjuntar
+            Documentos</h3>
+          <div class="row">
+            <div class="col-6">
+              <hr style="width:480px; margin-left:80px;" id="hrplantilla">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-2 mt-1">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Seleccione la Facultad</label>
+            <select class="form-control col-md-10" id="exampleFormControlSelect1" (change)="selectIdFacultad($event)">
+              <option value="0">Seleccionar...</option>
+              <option *ngFor="let facultades of listFacultades" value="{{facultades.id_facultad}}">
+                {{facultades.abreviatura}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group" *ngIf="listEscuelaFacultades?.length > 0">
+            <label for="exampleFormControlInput1">Seleccione la Escuela</label>
+            <select class="form-control col-md-10" id="exampleFormControlSelect1" (change)="selectIdEscuela($event)">
+              <option value="0">Seleccionar...</option>
+              <option *ngFor="let escuelafacultades of listEscuelaFacultades" value="{{escuelafacultades.id_escuela}}">
+                {{escuelafacultades.nombre_escuela}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group" *ngIf="listAlumnoPlan?.length > 0">
+            <label for="exampleFormControlInput1">Seleccione al Alumno</label>
+            <select class="form-control col-md-10" id="exampleFormControlSelect1" (change)="selectIdPlan($event)">
+              <option>Seleccionar...</option>
+              <option *ngFor="let listplan of listAlumnoPlan" value="{{listplan.id_plan}}">
+                {{listplan.nombre_persona}} {{listplan.apellido_persona}} / {{listplan.nombre_convocatoria}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-6 mt-4">
+              <label style="margin-left:90px;">VISA: </label>
+              <hr style="width: 218px; margin-left: 90px; margin-top: 0px;">
+
+              <label style="margin-left:90px; margin-top:14px;">Pasaporte: </label>
+              <hr style="width: 218px; margin-left: 90px; margin-top: 0px;">
+
+              <label style="margin-left:90px; margin-top:16px;">Seguro Internacional: </label>
+              <hr style="width: 218px; margin-left: 90px; margin-top: 0px;">
+
+              <label style="margin-left:90px; margin-top:16px;">Ticket Avión: </label>
+              <hr style="width: 218px; margin-left: 90px; margin-top: 0px;">
+
+            </div>
+            <div class="col-6 mt-2">
+              <mat-form-field style="width: 150px;">
+                <ngx-mat-file-input #DocVisa placeholder="Adjuntar Archivo" [accept]="''" (change)="onFileVisa($event)">
+                </ngx-mat-file-input>
+                <mat-icon matSuffix *ngIf="DocVisa.empty" style="cursor: pointer;">folder</mat-icon>
+                <a mat-icon-button matSuffix *ngIf="!DocVisa.empty" (click)="DocVisa.clear($event)"
+                  style="cursor: pointer;">
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </mat-form-field>
+
+              <br>
+
+              <mat-form-field style="width: 150px;">
+                <ngx-mat-file-input #DocPasaporte placeholder="Adjuntar Archivo" [accept]="''"
+                  (change)="onFilePasaporte($event)">
+                </ngx-mat-file-input>
+                <mat-icon matSuffix *ngIf="DocPasaporte.empty" style="cursor: pointer;">folder</mat-icon>
+                <a mat-icon-button matSuffix *ngIf="!DocPasaporte.empty" (click)="DocPasaporte.clear($event)"
+                  style="cursor: pointer;">
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </mat-form-field>
+
+              <br>
+
+
+              <mat-form-field style="width: 150px;">
+                <ngx-mat-file-input #DocSeguro placeholder="Adjuntar Archivo" [accept]="''"
+                  (change)="onFileSeguro($event)">
+                </ngx-mat-file-input>
+                <mat-icon matSuffix *ngIf="DocSeguro.empty" style="cursor: pointer;">folder</mat-icon>
+                <a mat-icon-button matSuffix *ngIf="!DocSeguro.empty" (click)="DocSeguro.clear($event)"
+                  style="cursor: pointer;">
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </mat-form-field>
+
+              <br>
+
+              <mat-form-field style="width: 150px;">
+                <ngx-mat-file-input #DocTicket placeholder="Adjuntar Archivo" [accept]="''"
+                  (change)="onFileTicket($event)">
+                </ngx-mat-file-input>
+                <mat-icon matSuffix *ngIf="DocTicket.empty" style="cursor: pointer;">folder</mat-icon>
+                <a mat-icon-button matSuffix *ngIf="!DocTicket.empty" (click)="DocTicket.clear($event)"
+                  style="cursor: pointer;">
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </mat-form-field>
+
+            </div>
+            <div class="row">
+              <div class="col mt-3">
+                <div class="row let">
+                  <button type="button" style="margin-left:308px;" class="btn btn-danger al"
+                    (click)="Guardar()">Registrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col col-sm12 col-md-12 col-lg-12 col-xl-12">
+        <div class="table-responsive-sm">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Universidad Destino</th>
+                <th scope="col">Alumno</th>
+                <th scope="col">Convocatoria</th>
+                <th scope="col">Escuela Profesional</th>
+                <th scope="col">Visa</th>
+                <th scope="col">Pasaporte</th>
+                <th scope="col">Seguro Internacional</th>
+                <th scope="col">Ticket de Avión</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let listTramite of listTramites | paginate: { itemsPerPage: 2, currentPage: p }; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{listTramite.nombre_universidad_convenio}}</td>
+                <td>{{listTramite.nombre_persona}} {{listTramite.apellido_persona}}</td>
+                <td>{{listTramite.nombre_convocatoria}}</td>
+                <td>{{listTramite.nombre_escuela}}</td>
+                <td><a href="{{listTramite.visa}}" target="_blank"><i class="fab fa-cc-visa fa-2x"
+                      style="color:rgb(19, 39, 150)"></i></a></td>
+                <td><a href="{{listTramite.pasaporte}}" target="_blank" style="margin-left:28px;"><i
+                      class="fas fa-passport fa-2x" style="color:rgb(211, 151, 62)"></i></a></td>
+                <td><a href="{{listTramite.seguro_internacional}}" target="_blank" style="margin-left:68px;"><i
+                      class="fas fa-file-medical-alt fa-2x" style="color:rgb(19, 56, 90)"></i></a></td>
+                <td><a href="{{listTramite.ticket_avion}}" target="_blank" style="margin-left:50px;"><i
+                      class="fas fa-address-card fa-2x" style="color:rgb(19, 56, 90)"></i></a></td>
+                      <td><a (click)="eliminar_tramite(listTramite)" style="margin-left:16px; cursor:pointer;">
+                        <i class="fas fa-trash-alt fa-2x" style="color: rgb(112, 24, 24);"></i>
+                      </a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-left:468px;">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
